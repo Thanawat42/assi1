@@ -33,11 +33,12 @@ if upload_file is not None:
     x = np.expand_dims(x, axis=0)
     x = preprocess_input(x)
 
-    # prediction
-    preds = model.predict(x)
-    top_preds = decode_predictions(preds, top=3)[0]
     
-    #display prediction 
-    st.subheader("Predictions:")
-  for i, pred in enumerate(top_preds):
-     st.write(f"{i+1}. **{pred[1]}** -{round(pred[2]*100,2)}%")
+ # Prediction
+    preds = loaded_model.predict(x)
+    top_preds = decode_predictions(preds, top=3)[0]
+
+    # Display predictions
+    print("Predictions:")
+    for i, pred in enumerate(top_preds):
+        print(f"{i+1}. **{pred[1]}** — {round(pred[2]*100, 2)}%")
